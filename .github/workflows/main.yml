@@ -1,0 +1,17 @@
+name: react build
+on:
+  push:
+    branches:
+      - main
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sourece code.
+        uses: actions/@checkout@main
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
