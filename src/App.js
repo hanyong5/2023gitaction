@@ -13,6 +13,7 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import hanyong5 from "./data";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -31,6 +32,26 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 function App() {
   const [expanded, setExpanded] = React.useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [viewMessage, setViewMessage] = useState("");
+
+  const dataHandler = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    // 중복 여부 확인
+    const isDuplicate = hanyong5.some((item) => item.id === value);
+
+    // 중복이면 처리
+    if (isDuplicate) {
+      // 중복 처리 로직을 여기에 추가하십시오.
+      console.log("중복된 값이 있습니다.");
+      setViewMessage("중복된 값이 있습니다.");
+    } else {
+      console.log("중복된 값이 없음.");
+      setViewMessage("중복된 값이 없음.");
+    }
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -76,6 +97,8 @@ function App() {
           </Typography>
         </CardContent>
       </Card>
+      {viewMessage}
+      <input type="text" onChange={dataHandler} value={inputValue} />
     </div>
   );
 }
